@@ -1,7 +1,6 @@
-﻿using System.Reflection;
-using UnityEngine;
+﻿using UnityEngine;
 
-public partial class DamageDealer : MonoBehaviour
+public class DamageDealer : MonoBehaviour
 {
     [SerializeField]
     private int damage = 10;
@@ -10,13 +9,8 @@ public partial class DamageDealer : MonoBehaviour
         HealthComponent health = collision.GetComponent<HealthComponent>();
         if (health != null)
         {
-
-            DealDamage(health, damage);
+            health.TakeDamage(damage);
             Debug.Log("Герой получил урон: " + damage);
         }
-    }
-    protected virtual void DealDamage(HealthComponent healthComponent, int damage)
-    {
-        healthComponent.TakeDamage(damage);
     }
 }

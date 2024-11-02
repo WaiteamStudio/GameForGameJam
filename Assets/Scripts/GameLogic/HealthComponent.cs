@@ -22,6 +22,13 @@ public class HealthComponent : MonoBehaviour
         currentHealth = maxHealth;
         eventBus = ServiceLocator.Current.Get<EventBus>();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) // Нажатие пробела переключает форму
+        {
+            SwitchForm();
+        }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -55,5 +62,27 @@ public class HealthComponent : MonoBehaviour
         eventBus.Invoke(new PlayerDiedEvent()) ;
         Debug.Log("Герой погиб");
         // Здесь можно добавить логику проигрыша или респауна
+    }
+
+
+    public void SwitchForm()
+    {
+        // Переключаем форму игрока
+        currentForm = currentForm == PlayerForm.Water ? PlayerForm.Fire : PlayerForm.Water;
+        UpdatePlayerLayer();
+        Debug.Log("Форма игрока: " + currentForm);
+    }
+
+    private void UpdatePlayerLayer()
+    {
+        // Меняем слой игрока в зависимости от формы
+        if (currentForm == PlayerForm.Fire)
+        {
+            gameObject.layer = LayerMask.NameToLayer("FireLayer");
+        }
+        else
+        {
+            gameObject.layer = LayerMask.NameToLayer("WaterLayer");
+        }
     }
 }

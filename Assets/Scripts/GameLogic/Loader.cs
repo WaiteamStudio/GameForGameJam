@@ -12,10 +12,12 @@ public static class Loader
     private static AsyncOperation loadingAsyncOperation;
     public enum Scene
     {
-        Game,
+        
         Loading,
         MainMenu,
-        Shop
+        Lev1,
+        Level2,
+        Tiles
     }
     private static Action onLoaderCallback;
     public static void Load(Scene scene)
@@ -32,6 +34,7 @@ public static class Loader
     {
         yield return null;
         loadingAsyncOperation = SceneManager.LoadSceneAsync(scene.ToString());
+        Debug.Log(" scene "  + scene.ToString() + loadingAsyncOperation.progress);
         while (!loadingAsyncOperation.isDone)
         {
             yield return null;

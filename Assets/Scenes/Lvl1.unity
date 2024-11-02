@@ -463,9 +463,7 @@ MonoBehaviour:
   moveSpeed: 2
   dead: 0
   idleTime: 0.8
-  idleTimer: 0
   doesIdle: 1
-  player: {fileID: 0}
   distToPlayerHor: 5
   distToPlayerVert: 10
   distToPoint: 0.3
@@ -563,7 +561,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &439694304
@@ -1375,9 +1373,7 @@ MonoBehaviour:
   moveSpeed: 1
   dead: 0
   idleTime: 1
-  idleTimer: 0
   doesIdle: 1
-  player: {fileID: 0}
   distToPlayerHor: 5
   distToPlayerVert: 5
   distToPoint: 0.3

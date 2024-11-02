@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BasicEnemyBehavior : MonoBehaviour
 {   
-    //waypoints
+    //list of waypoints
     public List<Transform> points;
     public int nextID = 0; // next point index
     private int idChangeValue = 1; //applied to id for changing
@@ -20,11 +20,18 @@ public class BasicEnemyBehavior : MonoBehaviour
     private int enemyState = 0; //action state
 
     public float idleTime = 1f;
-    public float idleTimer = 0;
-    public bool doesIdle = false;
-    public GameObject player;
-    public float distToPlayerHor = 10;
-    public float distToPlayerVert = 10;
+    private float idleTimer = 0; //countdown till returning to roaming
+    public bool doesIdle = true;
+
+    private GameObject player;
+
+    //checking horisontal and vertical distance to player and when it should react
+    public float distToPlayerHor = 5;
+    public float distToPlayerVert = 5;
+
+    //checking how close the player should be to the point to count it as "reached"
+    public float distToPoint = 0.3f;
+
     private void Reset()
     {
         Init();
@@ -33,7 +40,7 @@ public class BasicEnemyBehavior : MonoBehaviour
     void Init()
     {
         //GetComponent<BoxCollider2D>().isTrigger = false; //true
-
+        GetComponent<Rigidbody2D>().freezeRotation = true;
         //Create Root Object
         GameObject root = new GameObject(name + "_Root");
         //Reset Position of Root to enemy object
@@ -82,6 +89,11 @@ public class BasicEnemyBehavior : MonoBehaviour
 
             case 2: //angy
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y), moveSpeed * Time.deltaTime);
+                if (player.transform.position.x > transform.position.x)
+                {
+                    transform.localScale = new Vector2(-1, 1);
+                }
+                else transform.localScale = new Vector2(1, 1);
                 if (Vector2.Distance(transform.position, new Vector2(player.transform.position.x, transform.position.y)) > distToPlayerHor || Vector2.Distance(transform.position, new Vector2(transform.position.x, player.transform.position.y)) > distToPlayerVert)
                 {
                     enemyState = 0;
@@ -129,20 +141,21 @@ public class BasicEnemyBehavior : MonoBehaviour
         //Move the enemy towards towards the point
         transform.position = Vector2.MoveTowards(transform.position, goalPoint.transform.position,moveSpeed*Time.deltaTime);
         //Check distance between enemy and goal point to trigger next point
-        if(Vector2.Distance(transform.position, goalPoint.transform.position) < 0.3f)
+        if(Vector2.Distance(transform.position, goalPoint.transform.position) < distToPoint)
         {
             //check if reached end (-1)
             if (nextID == points.Count - 1) {
                 idChangeValue = -1;
-                if (doesIdle) { enemyState = 0; idleTimer = idleTime;}
+                //if (doesIdle) { enemyState = 0; idleTimer = idleTime;}
             }
             //check if reached start (+1)
             if (nextID == 0)
             {
                 idChangeValue = 1;
-                if (doesIdle) { enemyState = 0; idleTimer = idleTime; }
+                //if (doesIdle) { enemyState = 0; idleTimer = idleTime; }
             }
             //aply change to nextID
+            if (doesIdle) { enemyState = 0; idleTimer = idleTime; }
             nextID += idChangeValue;
         }
     }

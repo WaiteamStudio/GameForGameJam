@@ -18,6 +18,14 @@ public class Weapon : MonoBehaviour
     float Radius;
     [SerializeField]
     bool rotateToMouseCursor;
+    [SerializeField]
+    GameObject bulletpf;
+    [SerializeField]
+    Transform spawnPoint;
+    [SerializeField]
+    Transform BulletParent;
+    [SerializeField]
+    float BulletSpeed;
     private void Awake()
     {
         _particleSystem = GetComponent<ParticleSystem>();
@@ -26,6 +34,10 @@ public class Weapon : MonoBehaviour
     {
         RotateToMouseCursor();
         PlayerRotate();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
     }
 
     private void PlayerRotate()
@@ -47,7 +59,14 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        _particleSystem.Play();
-        _audioSource.PlayOneShot(ShootSound);
+        if(_particleSystem!=null)
+            _particleSystem?.Play();
+        if (_audioSource != null)
+            _audioSource?.PlayOneShot(ShootSound);
+        GameObject bulletGO = Instantiate(bulletpf, spawnPoint.position, transform.localRotation, BulletParent);
+        Bullet bullet =  bulletGO.GetComponent<Bullet>();
+        Vector3 direction = (Vector3.MoveTowards(spawnPoint.position, PointerInput.GetPointerInput(), 1f) - transform.position).normalized;
+        bullet.Init(direction, BulletSpeed);
+        Debug.Log("Spawn Direction: " + bullet.GetDirection().ToString());
     }
 }

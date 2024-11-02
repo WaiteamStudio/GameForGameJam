@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-namespace CustomEventBus
-{
     public class EventBus : IService
     {
         private Dictionary<string, List<CallbackWithPriority>> _signalCallbacks = new Dictionary<string, List<CallbackWithPriority>>();
@@ -54,4 +51,3 @@ namespace CustomEventBus
             }
         }
     }
-}

@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour
     //через инспектор передать? Почему бы и нет
     public void LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        Loader.Load(Loader.Scene.Level1);
     }
 
     public void CompleteLevel(int levelNumber)

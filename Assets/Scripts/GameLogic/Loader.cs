@@ -12,10 +12,10 @@ public static class Loader
     private static AsyncOperation loadingAsyncOperation;
     public enum Scene
     {
-        Game,
         Loading,
         MainMenu,
-        Shop
+        Level1,
+        Level2,
     }
     private static Action onLoaderCallback;
     public static void Load(Scene scene)

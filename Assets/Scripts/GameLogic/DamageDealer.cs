@@ -13,4 +13,8 @@ public class DamageDealer : MonoBehaviour
             Debug.Log("Герой получил урон: " + damage);
         }
     }
+    protected virtual void DealDamage(HealthComponent healthComponent, int damage)
+    { 
+        healthComponent.TakeDamage(damage);
+    }
 }

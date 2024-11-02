@@ -6,6 +6,7 @@ public class HealthComponent : MonoBehaviour
     public int maxHealth = 100;
     [SerializeField]
     private int currentHealth;
+    private PlayerForm currentForm;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -17,6 +18,14 @@ public class HealthComponent : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+    
+    public void TakeDamage(int damage, PlayerForm form)
+    {
+        if(form!= currentForm)
+        {
+            TakeDamage(damage);
         }
     }
 

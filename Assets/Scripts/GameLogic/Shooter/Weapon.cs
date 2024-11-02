@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
     {
         RotateToMouseCursor();
         PlayerRotate();
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.J))
         {
             Shoot();
         }

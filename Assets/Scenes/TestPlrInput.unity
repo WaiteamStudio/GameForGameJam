@@ -779,15 +779,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4921302055638230410, guid: 64181b333a0a20546bcbe7f2f3555f96, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000013113022
+      value: 322.59
       objectReference: {fileID: 0}
     - target: {fileID: 4921302055638230410, guid: 64181b333a0a20546bcbe7f2f3555f96, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 215.079
       objectReference: {fileID: 0}
     - target: {fileID: 4921302055638230410, guid: 64181b333a0a20546bcbe7f2f3555f96, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0036427043
       objectReference: {fileID: 0}
     - target: {fileID: 4921302055638230410, guid: 64181b333a0a20546bcbe7f2f3555f96, type: 3}
       propertyPath: m_LocalRotation.w
@@ -818,7 +818,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4753575378607157802, guid: 64181b333a0a20546bcbe7f2f3555f96, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64181b333a0a20546bcbe7f2f3555f96, type: 3}
@@ -1910,7 +1911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3704d5a152e0946862a39bbf26d8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 0
   invulnerabilityTime: 0.3
   form: 0
 --- !u!1 &838656694
@@ -3782,9 +3783,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
-    - target: {fileID: 3562793176075654893, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
-      propertyPath: m_Layer
-      value: 8
+    - target: {fileID: 4498278288508609069, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
+      propertyPath: m_Mass
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5755820106462637765, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: maxHealth

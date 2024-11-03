@@ -6,7 +6,6 @@ public class DamageDealer : MonoBehaviour
     private int damage = 10;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("adsd");
         HealthComponent health = collision.GetComponent<HealthComponent>();
         if (health != null)
         {
@@ -15,12 +14,11 @@ public class DamageDealer : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("adsd");
+        Debug.Log("OnCollisionEnter2D");
         HealthComponent health = collision.gameObject. GetComponent<HealthComponent>();
         if (health != null)
         {
             health.TakeDamage(damage);
-            Debug.Log("Герой получил урон: " + damage);
         }
     }
     protected virtual void DealDamage(HealthComponent healthComponent, int damage)

@@ -4,8 +4,15 @@ using UnityEngine.SceneManagement;
 public class PauseBtns : Sounds
 {
     [SerializeField] private GameObject pauseMenu;
-
-    public void PauseButton()
+    private void Awake()
+    {
+        ServiceLocator.Current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPLayerDied);
+    }
+    public void OnPLayerDied(PlayerDiedEvent e)
+    {
+        Pause();
+    }
+    public void Pause()
     {
         PlaySound(sounds[0]);
         Time.timeScale = 0; 

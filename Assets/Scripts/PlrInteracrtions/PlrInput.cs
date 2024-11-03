@@ -10,7 +10,8 @@ public class PlrInput : MonoBehaviour
     [SerializeField] private Sprite fireFormSprite; //спрайт для огненной формы
     [SerializeField] private Sprite waterFormSprite; //спрайт для водяной формы
     private SpriteRenderer spriteRenderer; //компонент спрайт рендерер пресонажа 
-
+    [SerializeField]
+    Weapon Weapon;
     private void Awake()
     {
         plrMovement = GetComponent<PlrMovement>();
@@ -25,7 +26,10 @@ public class PlrInput : MonoBehaviour
         bool isJumpButtonPressed = Input.GetButtonDown(GlobalStringVars.JUMP);
         bool isSwitchFormPressed = Input.GetButtonDown(GlobalStringVars.SWITCH_FORM);
         bool isTeleportPressed = Input.GetButtonDown(GlobalStringVars.TELEPORT_BUTTON);
+        bool isFirePressed = Input.GetButtonDown(GlobalStringVars.FIRE);
 
+        if(isFirePressed)
+            Weapon.Shoot(currentForm);
         plrMovement.Move(horizontalDirection, isJumpButtonPressed);
 
         if (isSwitchFormPressed)

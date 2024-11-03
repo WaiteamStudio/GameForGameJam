@@ -26,7 +26,11 @@ public class HealthComponent : MonoBehaviour
     
     public void TakeDamage(int damage, PlayerForm form)
     {
-        if(form!= currentForm)
+        if(form==PlayerForm.none)
+        {
+            TakeDamage(damage);
+        }
+        else if(form!= currentForm)
         {
             TakeDamage(damage);
         }

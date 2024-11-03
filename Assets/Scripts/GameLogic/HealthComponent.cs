@@ -8,7 +8,11 @@ public class HealthComponent : MonoBehaviour
     private int currentHealth;
     [SerializeField]
     private PlayerForm currentForm;
+    [SerializeField]
     private EntityType entityType;
+    [SerializeField]
+    float invulnerabilityTime;
+    private float lastTimeDamaged;
     enum EntityType
     {
         player,
@@ -21,25 +25,46 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        lastTimeDamaged = Time.time;
         ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage));
-        Debug.Log("Сущнссть получила урон: " + damage);
+        Debug.Log($"Сущнссть {gameObject.name} получила урон: " + damage);
         if (currentHealth <= 0)
         {
             Die();
         }
     }
-    
+
+    public void TakeDamage(int damage, out bool damaged)
+    {
+        if (lastTimeDamaged + invulnerabilityTime > Time.time)
+        {
+            Debug.Log($"В Сущнссть должна была получить урон {damage}, но не уязвима ещё  {lastTimeDamaged + invulnerabilityTime - Time.time} " );
+            damaged = false;
+            return;
+        }
+        TakeDamage(damage);
+        damaged = true ;
+    }
     public void TakeDamage(int damage, PlayerForm form)
+    {
+        TakeDamage(damage, form, out bool damaged);
+    }
+    public void TakeDamage(int damage, PlayerForm form, out bool damaged)
     {
         if(form==PlayerForm.none)
         {
-            TakeDamage(damage);
+            TakeDamage(damage, out damaged);
         }
         else if(form!= currentForm)
         {
-            TakeDamage(damage);
+            TakeDamage(damage,out damaged);
+        }
+        else
+        {
+            damaged = false ;
         }
     }
+   
 
     private void Die()
     {

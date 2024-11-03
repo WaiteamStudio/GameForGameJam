@@ -79,6 +79,7 @@ public class Weapon : MonoBehaviour
                 Bullet bullet =  bulletGO.GetComponent<Bullet>();
                 Vector3 direction = (Vector3.MoveTowards(spawnPoint.position, PointerInput.GetPointerInput(), 1f) - transform.position).normalized;
                 bullet.Init(direction, BulletSpeed);
+                bullet.SetForm(health.GetForm());
                 Debug.Log("Spawn Direction: " + bullet.GetDirection().ToString());
             }
         }

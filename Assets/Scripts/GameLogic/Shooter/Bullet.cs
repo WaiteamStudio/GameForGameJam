@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour
     bool ScreenEdgeDestroy;
     [SerializeField]
     bool LifeTimeDestroy;
-
     MoveMechanic moveMechanic;
 
     public Bullet()
@@ -78,9 +77,15 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // ”ничтожение при столкновении
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
+    }
+
+    internal void SetForm(PlayerForm playerForm)
+    {
+        ElementalDamageDealer damageDealer = GetComponent<ElementalDamageDealer>();
+        if(damageDealer != null)
+            damageDealer.SetForm(playerForm);
     }
 }

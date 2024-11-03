@@ -214,6 +214,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   currentForm: 0
+  entityType: 1
 --- !u!1 &7271850228007194659
 GameObject:
   m_ObjectHideFlags: 0

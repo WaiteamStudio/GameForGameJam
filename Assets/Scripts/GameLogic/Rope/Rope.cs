@@ -5,6 +5,8 @@ public class Rope : MonoBehaviour
 {
     public GameObject ropeSegmentpf; // Префаб сегмента веревки
     public int segmentCount = 10; // Количество сегментов
+    public float spaceBetween = 0.2f;
+    public float weightRopeLength = 1f; // Количество сегментов
     public GameObject weightpf; // Груз, который будет висеть на веревке
 
     private void Start()
@@ -15,7 +17,7 @@ public class Rope : MonoBehaviour
         {
             // Создаем новый сегмент веревки
             GameObject newSegment = Instantiate(ropeSegmentpf, transform);
-            newSegment.transform.position = transform.position + Vector3.down * i * 0.2f; // Задаем позицию сегмента
+            newSegment.transform.position = transform.position + Vector3.down * i * spaceBetween; // Задаем позицию сегмента
 
             // Подключаем HingeJoint2D к предыдущему сегменту
             if (previousSegment != null)
@@ -31,11 +33,14 @@ public class Rope : MonoBehaviour
             }
 
             previousSegment = newSegment;
+            if( i == segmentCount - 1 )
+            {
+                weightpf = Instantiate(weightpf, transform);
+                HingeJoint2D weightJoint = weightpf.GetOrAddComponent<HingeJoint2D>();
+                weightJoint.transform.position = transform.position + Vector3.down * (i+1) * (spaceBetween + weightRopeLength);
+                weightJoint.connectedBody = previousSegment.GetComponent<Rigidbody2D>();
+            }
         }
 
-        weightpf = Instantiate(weightpf, transform);
-        // Соединяем последний сегмент с грузом
-        HingeJoint2D weightJoint = weightpf.GetOrAddComponent<HingeJoint2D>();
-        weightJoint.connectedBody = previousSegment.GetComponent<Rigidbody2D>();
     }
 }

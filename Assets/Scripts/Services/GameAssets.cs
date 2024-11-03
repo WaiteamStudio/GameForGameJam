@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameAssets : MonoBehaviour, IService
 {
@@ -11,4 +12,9 @@ public class GameAssets : MonoBehaviour, IService
         public SoundManager.Sound sound;
         public AudioClip audioClip;
     }
+    public AudioMixer audioMixer;
+    public AudioMixerGroup SoundsAudioMixerGroup;
+    public AudioMixerGroup MusicAudioMixer;
+    public AudioMixerGroup GlobalAudioMixer;
+
 }

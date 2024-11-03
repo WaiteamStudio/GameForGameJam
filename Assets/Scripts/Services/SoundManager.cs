@@ -12,6 +12,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public static class SoundManager {
 
@@ -24,6 +25,12 @@ public static class SoundManager {
         Treasure,
         ButtonOver,
         ButtonClick,
+    }
+    public enum AudioGroup
+    {
+        sounds,
+        music,
+        global
     }
     
     private static Dictionary<Sound, float> soundTimerDictionary;
@@ -59,11 +66,12 @@ public static class SoundManager {
         }
     }
 
-    public static void PlaySound(Sound sound) {
+    public static void PlaySound(Sound sound, AudioGroup audioGroup = AudioGroup.global) {
         if (CanPlaySound(sound)) {
             if (oneShotGameObject == null) {
                 oneShotGameObject = new GameObject("One Shot Sound");
                 oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+                oneShotAudioSource.outputAudioMixerGroup = GetAudioMixerGroup(audioGroup);
             }
             oneShotAudioSource.PlayOneShot(GetAudioClip(sound));
         }
@@ -89,7 +97,20 @@ public static class SoundManager {
             //break;
         }
     }
-
+    private static AudioMixerGroup GetAudioMixerGroup(AudioGroup audioGroup)
+    {
+        switch (audioGroup)
+        {
+            case AudioGroup.global:
+                return GameAssets.GlobalAudioMixer;
+            case AudioGroup.music:
+                return GameAssets.MusicAudioMixer;
+            case AudioGroup.sounds:
+                return GameAssets.SoundsAudioMixerGroup;
+            default:
+                return gameAssets.GlobalAudioMixer;
+        }
+    }
     private static AudioClip GetAudioClip(Sound sound) {
         foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.soundAudioClipArray) {
             if (soundAudioClip.sound == sound) {

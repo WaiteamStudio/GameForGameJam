@@ -73,7 +73,7 @@ public static class SoundManager {
         }
     }
 
-    public static void PlaySound(Sound sound, AudioGroup audioGroup = AudioGroup.global) {
+    public static void PlaySound(Sound sound, AudioGroup audioGroup = AudioGroup.sounds) {
         if (CanPlaySound(sound)) {
             if (oneShotGameObject == null) {
                 oneShotGameObject = new GameObject("One Shot Sound");

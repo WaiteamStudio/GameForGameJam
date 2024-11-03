@@ -1,88 +1,101 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
+
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField]
     public int maxHealth = 100;
     [SerializeField]
-    private int currentHealth;
-    private int Health
+    public int currentHealth;
+    [SerializeField]
+    private PlayerForm currentForm;
+    [SerializeField]
+    private EntityType entityType;
+    [SerializeField]
+    float invulnerabilityTime;
+    private float lastTimeDamaged;
+    enum EntityType
     {
-        get { return currentHealth; }
-        set
-        {
-            currentHealth = value;
-        }
+        player,
+        monster
     }
-    public PlayerForm currentForm = PlayerForm.Water;
-    EventBus eventBus;
     private void Start()
     {
         currentHealth = maxHealth;
-        eventBus = ServiceLocator.Current.Get<EventBus>();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) // Нажатие пробела переключает форму
-        {
-            SwitchForm();
-        }
-    }
-
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-        eventBus.Invoke(new PlayerTakeDamageEvent(damage));
+        currentHealth -= damage;
+        lastTimeDamaged = Time.time;
+        ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage, currentHealth));
+        Debug.Log($"Сущнссть {gameObject.name} получила урон: " + damage);
         if (currentHealth <= 0)
         {
             Die();
         }
     }
-    
-    public void TakeDamage(int damage, PlayerForm playerForm)
+
+    public void TakeDamage(int damage, out bool damaged)
     {
-        if (playerForm != currentForm)
+        if (lastTimeDamaged + invulnerabilityTime > Time.time)
         {
-            TakeDamage(damage);
+            Debug.Log($"В Сущнссть должна была получить урон {damage}, но не уязвима ещё  {lastTimeDamaged + invulnerabilityTime - Time.time} " );
+            damaged = false;
+            SoundManager.PlaySound(SoundManager.Sound.PlayerGetDamaged);
+            return;
+        }
+        TakeDamage(damage);
+        damaged = true ;
+    }
+    public void TakeDamage(int damage, PlayerForm form)
+    {
+        TakeDamage(damage, form, out bool damaged);
+    }
+    
+    public void TakeDamage(int damage, PlayerForm form, out bool damaged)
+    {
+        if(form==PlayerForm.none)
+        {
+            TakeDamage(damage, out damaged);
+        }
+        else if(form!= currentForm)
+        {
+            TakeDamage(damage,out damaged);
         }
         else
         {
-            Heal(damage);
+            damaged = false ;
         }
     }
-
-    private void Heal(int damage)
+   public int GetCurrentHealth()
     {
-       Health += damage;
+        return currentHealth;
     }
 
     private void Die()
     {
-        eventBus.Invoke(new PlayerDiedEvent()) ;
-        Debug.Log("Герой погиб");
-        // Здесь можно добавить логику проигрыша или респауна
-    }
-
-
-    public void SwitchForm()
-    {
-        // Переключаем форму игрока
-        currentForm = currentForm == PlayerForm.Water ? PlayerForm.Fire : PlayerForm.Water;
-        UpdatePlayerLayer();
-        Debug.Log("Форма игрока: " + currentForm);
-    }
-
-    private void UpdatePlayerLayer()
-    {
-        // Меняем слой игрока в зависимости от формы
-        if (currentForm == PlayerForm.Fire)
+        if (entityType == EntityType.player)
         {
-            gameObject.layer = LayerMask.NameToLayer("FireLayer");
+            Debug.Log("Герой погиб");
+            ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerDiedEvent());
+            gameObject.SetActive(false);
         }
         else
         {
-            gameObject.layer = LayerMask.NameToLayer("WaterLayer");
+            Debug.Log("Монстр погиб");
+            gameObject.SetActive(false);
         }
+    }
+    private void SwitchForm()
+    {
+        currentForm = currentForm == PlayerForm.Fire ? PlayerForm.Water : PlayerForm.Fire;
+        Debug.Log("Персонаж сменил форму на: " + currentForm);
+    }
+    public void SetForm(PlayerForm form)
+    {
+        currentForm = form;
+    }
+    public PlayerForm GetForm()
+    {
+        return currentForm;
     }
 }

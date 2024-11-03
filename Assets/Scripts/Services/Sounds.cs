@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Sounds : MonoBehaviour
@@ -15,5 +16,10 @@ public class Sounds : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(clip, transform.position);
         }
+    }
+    public void PlaySound(int a)
+    {
+        if(sounds.Count()<a)
+            PlaySound(sounds[a]);
     }
 }

@@ -15,7 +15,7 @@ public class BasicEnemyBehavior : MonoBehaviour
 
     public bool isFire = true; //element
 
-    public float moveSpeed = 1f;
+    public float moveSpeed = 1.5f;
     public bool dead = false;
     private int enemyState = 0; //action state
 

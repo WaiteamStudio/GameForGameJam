@@ -5,7 +5,7 @@ public class HealthComponent : MonoBehaviour
     [SerializeField]
     public int maxHealth = 100;
     [SerializeField]
-    private int currentHealth;
+    public int currentHealth;
     [SerializeField]
     private PlayerForm currentForm;
     [SerializeField]
@@ -26,7 +26,7 @@ public class HealthComponent : MonoBehaviour
     {
         currentHealth -= damage;
         lastTimeDamaged = Time.time;
-        ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage));
+        ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage, currentHealth));
         Debug.Log($"Сущнссть {gameObject.name} получила урон: " + damage);
         if (currentHealth <= 0)
         {
@@ -40,6 +40,7 @@ public class HealthComponent : MonoBehaviour
         {
             Debug.Log($"В Сущнссть должна была получить урон {damage}, но не уязвима ещё  {lastTimeDamaged + invulnerabilityTime - Time.time} " );
             damaged = false;
+            SoundManager.PlaySound(SoundManager.Sound.PlayerGetDamaged);
             return;
         }
         TakeDamage(damage);
@@ -49,6 +50,7 @@ public class HealthComponent : MonoBehaviour
     {
         TakeDamage(damage, form, out bool damaged);
     }
+    
     public void TakeDamage(int damage, PlayerForm form, out bool damaged)
     {
         if(form==PlayerForm.none)
@@ -64,7 +66,10 @@ public class HealthComponent : MonoBehaviour
             damaged = false ;
         }
     }
-   
+   public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
 
     private void Die()
     {

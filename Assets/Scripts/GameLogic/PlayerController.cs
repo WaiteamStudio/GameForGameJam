@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IService
 {
     [SerializeField] private Sprite fireFormSprite; //спрайт для огненной формы
     [SerializeField] private Sprite waterFormSprite; //спрайт для водяной формы
@@ -24,7 +24,10 @@ public class PlayerController : MonoBehaviour
         UpdateSprite();
         ServiceLocator.current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPlayerDied);
     }
-
+    public HealthComponent GetHealthComponent()
+    {
+        return healthComponent;
+    }
     private void OnPlayerDied(PlayerDiedEvent @event)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();

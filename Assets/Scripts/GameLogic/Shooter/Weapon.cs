@@ -71,6 +71,7 @@ public class Weapon : MonoBehaviour
         {
             if (Time.timeScale != 0)
             {
+                SoundManager.PlaySound(SoundManager.Sound.PlayerAttack);
                 if(_particleSystem!=null)
                     _particleSystem?.Play();
                 if (_audioSource != null)

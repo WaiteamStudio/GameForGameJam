@@ -11,7 +11,6 @@ public class DamageDealer : MonoBehaviour
         if (health != null)
         {
             health.TakeDamage(damage);
-            Debug.Log("Герой получил урон: " + damage);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

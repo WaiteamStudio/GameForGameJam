@@ -24,6 +24,7 @@ public class HealthComponent : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        PlayGetDamageSound();
         currentHealth -= damage;
         lastTimeDamaged = Time.time;
         ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage, currentHealth));
@@ -34,13 +35,29 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
+    private void PlayGetDamageSound()
+    {
+        if (entityType == EntityType.player)
+        {
+            if(currentForm == PlayerForm.Fire)
+                SoundManager.PlaySound(SoundManager.Sound.PlayerGetDamagedFireForm);
+            if(currentForm == PlayerForm.Water)
+                SoundManager.PlaySound(SoundManager.Sound.PlayerGetDamagedWaterForm);
+        }
+        else
+        {
+            SoundManager.PlaySound(SoundManager.Sound.EnemyGetDamaged);
+
+        }
+    }
+
     public void TakeDamage(int damage, out bool damaged)
     {
         if (lastTimeDamaged + invulnerabilityTime > Time.time)
         {
             Debug.Log($"В Сущнссть должна была получить урон {damage}, но не уязвима ещё  {lastTimeDamaged + invulnerabilityTime - Time.time} " );
             damaged = false;
-            SoundManager.PlaySound(SoundManager.Sound.PlayerGetDamaged);
+            SoundManager.PlaySound(SoundManager.Sound.PlayerGetDamagedFireForm);
             return;
         }
         TakeDamage(damage);

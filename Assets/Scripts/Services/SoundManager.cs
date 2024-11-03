@@ -17,14 +17,22 @@ using UnityEngine.Audio;
 public static class SoundManager {
 
     public enum Sound {
-        PlayerMove,
+        PlayerMoveFireForm,
         PlayerAttack,
-        PlayerGetDamaged,
+        PlayerGetDamagedFireForm,
         EnemyHit,
         EnemyDie,
         Treasure,
         ButtonOver,
         ButtonClick,
+        PlayerJump,
+        EnemyMove,
+        PlayerMoveWaterForm,
+        EnemyGetDamaged,
+        PlayerGetDamagedWaterForm,
+        Teleportation,
+        FormSwitchFire,
+        FormSwitchWater,
     }
     public enum AudioGroup
     {
@@ -32,8 +40,11 @@ public static class SoundManager {
         music,
         global
     }
-    
-    private static Dictionary<Sound, float> soundTimerDictionary;
+
+    private static Dictionary<Sound, float> soundTimerDictionary = new Dictionary<Sound, float>()
+    {
+         [Sound.PlayerMoveFireForm] = 0f,
+    };
     private static GameObject oneShotGameObject;
     private static AudioSource oneShotAudioSource;
     private static GameAssets gameAssets;
@@ -44,10 +55,6 @@ public static class SoundManager {
                 gameAssets = ServiceLocator.current.Get<GameAssets>();
             return gameAssets;
             }
-    }
-    public static void Initialize() {
-        soundTimerDictionary = new Dictionary<Sound, float>();
-        soundTimerDictionary[Sound.PlayerMove] = 0f;
     }
 
     public static void PlaySound(Sound sound, Vector3 position) {
@@ -73,7 +80,11 @@ public static class SoundManager {
                 oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
                 oneShotAudioSource.outputAudioMixerGroup = GetAudioMixerGroup(audioGroup);
             }
-            oneShotAudioSource.PlayOneShot(GetAudioClip(sound));
+            AudioClip clip = GetAudioClip(sound);
+            if (clip != null)
+            {
+                oneShotAudioSource.PlayOneShot(clip);
+            }
         }
     }
 
@@ -81,7 +92,9 @@ public static class SoundManager {
         switch (sound) {
         default:
             return true;
-        case Sound.PlayerMove:
+        case Sound.PlayerMoveFireForm:
+        case Sound.PlayerMoveWaterForm:
+        case Sound.EnemyMove:
             if (soundTimerDictionary.ContainsKey(sound)) {
                 float lastTimePlayed = soundTimerDictionary[sound];
                 float playerMoveTimerMax = .15f;
@@ -117,7 +130,7 @@ public static class SoundManager {
                 return soundAudioClip.audioClip;
             }
         }
-        Debug.LogError("Sound " + sound + " not found!");
+        Debug.Log("Sound " + sound + " not found!");
         return null;
     }
 }

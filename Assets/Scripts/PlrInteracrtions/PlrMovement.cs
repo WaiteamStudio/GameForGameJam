@@ -39,6 +39,7 @@ public class PlrMovement : MonoBehaviour
 
     private void Jump()
     {
+        SoundManager.PlaySound(SoundManager.Sound.PlayerJump);
         if (isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -47,6 +48,14 @@ public class PlrMovement : MonoBehaviour
 
     private void HorizontalMovement(float direction)
     {
+        if(ServiceLocator.current.Get<PlayerController>().GetHealthComponent().GetForm() == PlayerForm.Fire)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.PlayerMoveFireForm);
+        }
+        else
+        {
+            SoundManager.PlaySound(SoundManager.Sound.PlayerMoveWaterForm);
+        }
         rb.velocity = new Vector2(direction*speed, rb.velocity.y);
     }
 }

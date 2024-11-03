@@ -140,8 +140,10 @@ public class BasicEnemyBehavior : MonoBehaviour
         else transform.localScale = new Vector2(1, 1);
         //Move the enemy towards towards the point
         transform.position = Vector2.MoveTowards(transform.position, goalPoint.transform.position,moveSpeed*Time.deltaTime);
+        //автор - Влад
+        PlayMoveSound();
         //Check distance between enemy and goal point to trigger next point
-        if(Vector2.Distance(transform.position, goalPoint.transform.position) < distToPoint)
+        if (Vector2.Distance(transform.position, goalPoint.transform.position) < distToPoint)
         {
             //check if reached end (-1)
             if (nextID == points.Count - 1) {
@@ -158,5 +160,9 @@ public class BasicEnemyBehavior : MonoBehaviour
             if (doesIdle) { enemyState = 0; idleTimer = idleTime; }
             nextID += idChangeValue;
         }
+    }
+    private void PlayMoveSound()
+    {
+        SoundManager.PlaySound(SoundManager.Sound.EnemyMove);
     }
 }

@@ -20,16 +20,19 @@ public class PlrInput : MonoBehaviour
         bool isSwitchFormPressed = Input.GetButtonDown(GlobalStringVars.SWITCH_FORM);
         bool isTeleportPressed = Input.GetButtonDown(GlobalStringVars.TELEPORT_BUTTON);
         bool isFirePressed = Input.GetButtonDown(GlobalStringVars.FIRE);
-        if(isFirePressed)
-            Weapon.Shoot();
-        plrMovement.Move(horizontalDirection, isJumpButtonPressed);
-        if (isSwitchFormPressed)
+        if(Time.timeScale !=0)
         {
-            playerController.SwitchForm();
-        }
-        if (isTeleportPressed)
-        {
-            playerController.TryTeleport();
+            if(isFirePressed)
+                Weapon.Shoot();
+            plrMovement.Move(horizontalDirection, isJumpButtonPressed);
+            if (isSwitchFormPressed)
+            {
+                playerController.SwitchForm();
+            }
+            if (isTeleportPressed)
+            {
+                playerController.TryTeleport();
+            }
         }
     }
 }

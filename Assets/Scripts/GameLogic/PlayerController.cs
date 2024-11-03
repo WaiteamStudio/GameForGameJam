@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour, IService
     {
         currentForm = currentForm == PlayerForm.Fire ? PlayerForm.Water : PlayerForm.Fire;
         UpdateSprite();
+        if (currentForm == PlayerForm.Fire)
+            SoundManager.PlaySound(SoundManager.Sound.FormSwitchFire);
+        else
+            SoundManager.PlaySound(SoundManager.Sound.FormSwitchWater);
         Debug.Log("Персонаж сменил форму на: " + currentForm);
     }
 
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour, IService
             UnityEngine.Transform target = nearTeleportationPoint.GetTeleportTarget();
             if (target != null)
             {
+                SoundManager.PlaySound(SoundManager.Sound.Teleportation);
                 transform.position = target.position; // Телепортация к точке
                 Debug.Log("Персонаж телепортировался!");
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public class ServiceLocator
 {
@@ -11,12 +12,17 @@ public class ServiceLocator
     /// Зарегистрированные сервисы
     /// </summary>
     private readonly Dictionary<string, IService> _services = new Dictionary<string, IService>();
-
-    public static ServiceLocator Current { get; private set; }
-
-    public static void Initialize()
+    public static ServiceLocator current;
+    public static ServiceLocator Current
     {
-        Current = new ServiceLocator();
+        get
+        {
+            if (current == null)
+            {
+                current = new ServiceLocator();
+            }
+            return current;
+        }
     }
 
     // Возвращает сервис нужного нам типа

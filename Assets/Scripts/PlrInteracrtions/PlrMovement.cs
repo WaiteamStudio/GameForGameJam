@@ -11,7 +11,6 @@ public class PlrMovement : MonoBehaviour
     [SerializeField] private Transform groundColliderTransform; //трансформ для того чтоб узнать позицию нижнего коллайдера персонажа
     [SerializeField] private float jumpOffset; //множитель на который мы увеличиваем наш обычный ground collider чтоб прыжок был более отзывчивым
     [SerializeField] private LayerMask groundMask; //layer на котором находится земля
-
     private Rigidbody2D rb; //риджит боди объекта
 
     private void Awake()

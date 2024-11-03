@@ -14,7 +14,6 @@ public class DamageDealer : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("OnCollisionEnter2D");
         HealthComponent health = collision.gameObject. GetComponent<HealthComponent>();
         if (health != null)
         {

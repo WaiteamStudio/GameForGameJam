@@ -10,30 +10,41 @@ public class Bullet : MonoBehaviour
     private Vector3 Direction;
     [SerializeField]
     public float MoveSpeed;
-    //[SerializeField]
-    //int Damage;
-    //private GameObject rifleMan;//owner,player,boss,host,parentm,wallah
+    [SerializeField]
+    private float lifeTime = 3f; // ¬рем€ жизни пули в секундах
+    [SerializeField]
+    bool ScreenEdgeDestroy;
+    [SerializeField]
+    bool LifeTimeDestroy;
+
     MoveMechanic moveMechanic;
-    public Bullet ()
+
+    public Bullet()
     {
         Direction = GetStartingDirection();
     }
     public Bullet(Vector3 direction)
     {
-       this.Direction = direction;
+        this.Direction = direction;
     }
     void FixedUpdate()
     {
-        if(moveMechanic!=null)
+        if(ScreenEdgeDestroy)
+            CheckIfOutOfScreen();
+        if (moveMechanic != null)
         {
             moveMechanic.FixedUpdate();
         }
     }
-    public void Init(Vector3 direction,float MoveSpeed)
+    public void Init(Vector3 direction, float MoveSpeed)
     {
         ChangeDirection(direction);
         ChangeSpeed(MoveSpeed);
         moveMechanic = new MoveMechanic(direction, MoveSpeed, transform);
+
+        // ”ничтожить объект после времени жизни
+        if(LifeTimeDestroy)
+            Destroy(gameObject, lifeTime);
     }
     public void ChangeDirection(Vector3 vector)
     {
@@ -53,11 +64,23 @@ public class Bullet : MonoBehaviour
     }
     private Vector2 MoveDirection()
     {
-        //Debug.Log($"Bullet ({gameObject.GetInstanceID()}) is Moving");
         return Direction;
     }
     private Vector3 GetStartingDirection()
     {
-        return new Vector3(1f,0f);
+        return new Vector3(1f, 0f);
+    }
+    private void CheckIfOutOfScreen()
+    {
+        Vector3 screenPosition = Camera.main.WorldToViewportPoint(transform.position);
+        if (screenPosition.x < 0 || screenPosition.x > 1 || screenPosition.y < 0 || screenPosition.y > 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+    // ”ничтожение при столкновении
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
     }
 }

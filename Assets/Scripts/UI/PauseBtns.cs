@@ -14,21 +14,22 @@ public class PauseBtns : Sounds
     }
     public void Pause()
     {
-        PlaySound(sounds[0]);
+        Debug.Log("Paused");
+        PlaySound(0);
         Time.timeScale = 0; 
         pauseMenu.SetActive(true);
     }
 
     public void UnPauseButton()
     {
-        PlaySound(sounds[0]);
+        PlaySound(0);
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void ExitToMainMenuBtn()
     {
-        PlaySound(sounds[0]);
+        PlaySound(0);
         SceneManager.LoadScene(0);
     }
 }

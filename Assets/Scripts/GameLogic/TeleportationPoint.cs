@@ -10,7 +10,7 @@ public class TeleportationPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlrInput>().SetNearTeleportationPoint(this);
+            other.GetComponent<PlayerController>().SetNearTeleportationPoint(this);
         }
     }
 
@@ -18,7 +18,7 @@ public class TeleportationPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlrInput>().SetNearTeleportationPoint(null); // Убираем ссылку на точку телепортации, если персонаж вышел из области
+            other.GetComponent<PlayerController>().SetNearTeleportationPoint(null); // Убираем ссылку на точку телепортации, если персонаж вышел из области
         }
     }
 

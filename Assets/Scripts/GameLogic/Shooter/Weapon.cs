@@ -26,6 +26,8 @@ public class Weapon : MonoBehaviour
     Transform BulletParent;
     [SerializeField]
     float BulletSpeed;
+    [SerializeField]
+    HealthComponent health;
     private void Awake()
     {
         _particleSystem = GetComponent<ParticleSystem>();
@@ -65,17 +67,20 @@ public class Weapon : MonoBehaviour
     }
     public void Shoot()
     {
-        if(Time.timeScale == 0)
+        if(health.GetForm() == PlayerForm.Fire)
         {
-            if(_particleSystem!=null)
-                _particleSystem?.Play();
-            if (_audioSource != null)
-                _audioSource?.PlayOneShot(ShootSound);
-            GameObject bulletGO = Instantiate(bulletpf, spawnPoint.position, transform.localRotation, BulletParent);
-            Bullet bullet =  bulletGO.GetComponent<Bullet>();
-            Vector3 direction = (Vector3.MoveTowards(spawnPoint.position, PointerInput.GetPointerInput(), 1f) - transform.position).normalized;
-            bullet.Init(direction, BulletSpeed);
-            Debug.Log("Spawn Direction: " + bullet.GetDirection().ToString());
+            if (Time.timeScale != 0)
+            {
+                if(_particleSystem!=null)
+                    _particleSystem?.Play();
+                if (_audioSource != null)
+                    _audioSource?.PlayOneShot(ShootSound);
+                GameObject bulletGO = Instantiate(bulletpf, spawnPoint.position, transform.localRotation, BulletParent);
+                Bullet bullet =  bulletGO.GetComponent<Bullet>();
+                Vector3 direction = (Vector3.MoveTowards(spawnPoint.position, PointerInput.GetPointerInput(), 1f) - transform.position).normalized;
+                bullet.Init(direction, BulletSpeed);
+                Debug.Log("Spawn Direction: " + bullet.GetDirection().ToString());
+            }
         }
 
     }

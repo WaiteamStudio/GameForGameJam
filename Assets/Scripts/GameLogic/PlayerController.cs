@@ -21,17 +21,19 @@ public class PlayerController : MonoBehaviour, IService
     private PlayerForm currentForm
     {
         get {
-            return healthComponent.GetForm();
+            PlayerHealth playerHealth = healthComponent as PlayerHealth;
+            return playerHealth.GetForm();
         }
         set {
-            healthComponent.SetForm(value);
-                }
+            PlayerHealth playerHealth = healthComponent as PlayerHealth;
+            playerHealth.SetForm(value);
+        }
     }
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlrMovement = GetComponent<PlrMovement>();
-        healthComponent = ServiceLocator.current.Get<PlayerController>().GetHealthComponent();
+        healthComponent = GetComponent<HealthComponent>();
         UpdateSprite();
         ServiceLocator.current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPlayerDied);
         

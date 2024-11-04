@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1138071}
   - component: {fileID: 1138070}
   - component: {fileID: 1138069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: fireMovePlatfVertic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a168b0db781dc442b42e0e0909bb23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 5
+  moveSpeed: 1
 --- !u!251 &1138071
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -9710,7 +9712,7 @@ GameObject:
   - component: {fileID: 532009541}
   - component: {fileID: 532009546}
   - component: {fileID: 532009539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: waterMovePlatfHoriz (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9902,6 +9904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb9c07c5a2e412498daeddb26d1abae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 6
+  moveSpeed: 1
 --- !u!1 &533419131
 GameObject:
   m_ObjectHideFlags: 0
@@ -10583,7 +10587,7 @@ Transform:
   m_GameObject: {fileID: 915752319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.052249, y: -9.007553, z: -9.996357}
+  m_LocalPosition: {x: -2.0565882, y: -9.007587, z: -9.996357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10617,7 +10621,7 @@ Transform:
   m_GameObject: {fileID: 917344204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.367751, y: -0.05244732, z: 0}
+  m_LocalPosition: {x: -6.363412, y: -0.052412987, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10921,7 +10925,7 @@ GameObject:
   - component: {fileID: 1332839925}
   - component: {fileID: 1332839924}
   - component: {fileID: 1332839923}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: waterMovePlatfHoriz (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10955,6 +10959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb9c07c5a2e412498daeddb26d1abae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 4
+  moveSpeed: 1
 --- !u!251 &1332839925
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -11498,7 +11504,7 @@ GameObject:
   - component: {fileID: 1739085348}
   - component: {fileID: 1739085347}
   - component: {fileID: 1739085346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: fireMovePlatfVertic (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11532,6 +11538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a168b0db781dc442b42e0e0909bb23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 4
+  moveSpeed: 1
 --- !u!251 &1739085348
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -12131,7 +12139,7 @@ GameObject:
   - component: {fileID: 1811026629}
   - component: {fileID: 1811026628}
   - component: {fileID: 1811026627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: waterMovePlatfHoriz (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12165,6 +12173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb9c07c5a2e412498daeddb26d1abae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 6
+  moveSpeed: 1
 --- !u!251 &1811026629
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -12317,7 +12327,7 @@ Transform:
   m_GameObject: {fileID: 1811026626}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.39, y: -12.24, z: 0}
+  m_LocalPosition: {x: 36.95, y: -12.24, z: 0}
   m_LocalScale: {x: 0.41285986, y: 0.41285986, z: 0.41285986}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12422,6 +12432,10 @@ PrefabInstance:
     - target: {fileID: 4723704235245612750, guid: 52f9601bb5613554bbcbedc6cc62dce7, type: 3}
       propertyPath: m_Name
       value: ordinaryMovePlatfHoriz (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723704235245612750, guid: 52f9601bb5613554bbcbedc6cc62dce7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7535190857520738439, guid: 52f9601bb5613554bbcbedc6cc62dce7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13087,7 +13101,7 @@ GameObject:
   - component: {fileID: 4631207562332597389}
   - component: {fileID: 9087259019241783054}
   - component: {fileID: 9087259019241783055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: waterMovePlatfVertic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13227,6 +13241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a168b0db781dc442b42e0e0909bb23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 5
+  moveSpeed: 1
 --- !u!114 &9087259019241783055
 MonoBehaviour:
   m_ObjectHideFlags: 0

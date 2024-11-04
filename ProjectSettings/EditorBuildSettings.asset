@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 6e186644ed5d5a649a4b60b897f85249
   - enabled: 1
+    path: Assets/Scenes/BeginComics.unity
+    guid: 35051b6fcf062bf45a27d904bc66ae97
+  - enabled: 1
     path: Assets/Scenes/Lvl1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: d0c3526f0e0817849916f2766c5d2aa8
   - enabled: 1
     path: Assets/Scenes/Titles.unity
     guid: d40a2dd5fa7996440b30e19b70149d2f

@@ -725,7 +725,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.33, y: -21.514, z: -10}
+  m_LocalPosition: {x: 3.33, y: -21.549, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1922,7 +1922,7 @@ Transform:
   m_GameObject: {fileID: 1306362505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.33, y: -21.514, z: -10}
+  m_LocalPosition: {x: 3.33, y: -21.549, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a95b664efc103c44ab1b270181e4c7cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d4c9c11b775d6445bc830b6838ec13c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2288,7 +2288,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c5d2eb0f536efb84eb6a42f43affa241, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3307,6 +3307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  invulnerabilityTime: 0
 --- !u!114 &1908347906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3336,6 +3337,8 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 0
   currentForm: 1
+  entityType: 0
+  invulnerabilityTime: 0
 --- !u!114 &1908347908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3502,7 +3505,7 @@ Transform:
   m_GameObject: {fileID: 1908347904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.33, y: -22.81, z: 0}
+  m_LocalPosition: {x: 3.33, y: -22.845, z: 0}
   m_LocalScale: {x: 0.31057, y: 0.31057, z: 0.31057}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3799,7 +3802,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: a9eafe102c6f57c4693bf741dba4ed3b, type: 3}
 --- !u!4 &2087176087 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5323646013820813217, guid: a9eafe102c6f57c4693bf741dba4ed3b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1321357250815957283, guid: a9eafe102c6f57c4693bf741dba4ed3b, type: 3}
   m_PrefabInstance: {fileID: 2087176086}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &679391404496781434
@@ -3966,6 +3969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  invulnerabilityTime: 0
   form: 1
 --- !u!1001 &5476153784074521672
 PrefabInstance:
@@ -4272,6 +4276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  invulnerabilityTime: 0
   form: 0
 --- !u!1001 &8689941627659580016
 PrefabInstance:

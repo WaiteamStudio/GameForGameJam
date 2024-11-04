@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : HealthComponent
 {
@@ -14,5 +15,7 @@ public class PlayerHealth : HealthComponent
         Debug.Log("Игрок погиб.");
         ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerDiedEvent());
         gameObject.SetActive(false);
+        SceneManager.LoadScene(2);
+        Time.timeScale = 1f;
     }
 }

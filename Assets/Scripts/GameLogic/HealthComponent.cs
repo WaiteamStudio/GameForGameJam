@@ -27,7 +27,8 @@ public class HealthComponent : MonoBehaviour
         PlayGetDamageSound();
         currentHealth -= damage;
         lastTimeDamaged = Time.time;
-        ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage, currentHealth));
+        if(entityType == EntityType.player)
+            ServiceLocator.Current.Get<EventBus>().Invoke(new PlayerTakeDamageEvent(damage, currentHealth));
         Debug.Log($"Сущнссть {gameObject.name} получила урон: " + damage);
         if (currentHealth <= 0)
         {

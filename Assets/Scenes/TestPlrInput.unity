@@ -4811,6 +4811,10 @@ PrefabInstance:
       propertyPath: currentForm
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5755820106462637765, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
+      propertyPath: invulnerabilityTime
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5939019570657933016, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: m_Name
       value: StepWaterParticleSystem

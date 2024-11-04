@@ -330,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2409096357736397091, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2409096357736397091, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: m_SortingLayerID
@@ -366,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562793176075654893, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: m_Name
-      value: Hero Variant
+      value: VladisloveHero Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3820375031618117965, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: moveWithTransform
@@ -902,6 +902,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5535436761148593038, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728558543215961659, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5728558543215961659, guid: 63cc89f7cfe6498418d0e284dd55a25d, type: 3}

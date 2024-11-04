@@ -26,6 +26,8 @@ public class Weapon : MonoBehaviour
     Transform BulletParent;
     [SerializeField]
     float BulletSpeed;
+    [SerializeField]
+    HealthComponent health;
     private void Awake()
     {
         _particleSystem = GetComponent<ParticleSystem>();
@@ -34,10 +36,6 @@ public class Weapon : MonoBehaviour
     {
         RotateToMouseCursor();
         PlayerRotate();
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
     }
 
     private void PlayerRotate()
@@ -56,17 +54,36 @@ public class Weapon : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
-
+    public void Shoot(PlayerForm playerForm)
+    {
+        if(playerForm == PlayerForm.Fire)
+        {
+            Shoot();
+        }
+        else
+        {
+            Debug.Log("U cant shoot in this form");
+        }
+    }
     public void Shoot()
     {
-        if(_particleSystem!=null)
-            _particleSystem?.Play();
-        if (_audioSource != null)
-            _audioSource?.PlayOneShot(ShootSound);
-        GameObject bulletGO = Instantiate(bulletpf, spawnPoint.position, transform.localRotation, BulletParent);
-        Bullet bullet =  bulletGO.GetComponent<Bullet>();
-        Vector3 direction = (Vector3.MoveTowards(spawnPoint.position, PointerInput.GetPointerInput(), 1f) - transform.position).normalized;
-        bullet.Init(direction, BulletSpeed);
-        Debug.Log("Spawn Direction: " + bullet.GetDirection().ToString());
+        if(health.GetForm() == PlayerForm.Fire)
+        {
+            if (Time.timeScale != 0)
+            {
+                SoundManager.PlaySound(SoundManager.Sound.PlayerAttack);
+                if(_particleSystem!=null)
+                    _particleSystem?.Play();
+                if (_audioSource != null)
+                    _audioSource?.PlayOneShot(ShootSound);
+                GameObject bulletGO = Instantiate(bulletpf, spawnPoint.position, transform.localRotation, BulletParent);
+                Bullet bullet =  bulletGO.GetComponent<Bullet>();
+                Vector3 direction = (Vector3.MoveTowards(spawnPoint.position, PointerInput.GetPointerInput(), 1f) - transform.position).normalized;
+                bullet.Init(direction, BulletSpeed);
+                bullet.SetForm(health.GetForm());
+                Debug.Log("Spawn Direction: " + bullet.GetDirection().ToString());
+            }
+        }
+
     }
 }

@@ -3,80 +3,36 @@ using UnityEngine;
 [RequireComponent(typeof(PlrMovement))]
 public class PlrInput : MonoBehaviour
 {
-    private PlrMovement plrMovement; //объект класса
-    private PlayerForm currentForm = PlayerForm.Fire; //начальная форма
-    private TeleportationPoint nearTeleportationPoint = null; // Текущая точка телепортации рядом с персонажем
+    private PlrMovement plrMovement; //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-    [SerializeField] private Sprite fireFormSprite; //спрайт для огненной формы
-    [SerializeField] private Sprite waterFormSprite; //спрайт для водяной формы
-    private SpriteRenderer spriteRenderer; //компонент спрайт рендерер пресонажа 
-
+    [SerializeField]
+    Weapon Weapon;
+    PlayerController playerController;
     private void Awake()
     {
         plrMovement = GetComponent<PlrMovement>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        UpdateSprite();
+        playerController = GetComponent<PlayerController>();
     }
-
     private void Update()
     {
         float horizontalDirection = Input.GetAxisRaw(GlobalStringVars.HORIZONTAL_AXIS);
         bool isJumpButtonPressed = Input.GetButtonDown(GlobalStringVars.JUMP);
         bool isSwitchFormPressed = Input.GetButtonDown(GlobalStringVars.SWITCH_FORM);
         bool isTeleportPressed = Input.GetButtonDown(GlobalStringVars.TELEPORT_BUTTON);
-
-        plrMovement.Move(horizontalDirection, isJumpButtonPressed);
-
-        if (isSwitchFormPressed)
+        bool isFirePressed = Input.GetButtonDown(GlobalStringVars.FIRE);
+        if(Time.timeScale !=0)
         {
-            SwitchForm();
-        }
-
-        if (isTeleportPressed)
-        {
-            TryTeleport();
-        }
-    }
-
-    private void SwitchForm()
-    {
-        currentForm = currentForm == PlayerForm.Fire ? PlayerForm.Water : PlayerForm.Fire;
-        UpdateSprite();
-        Debug.Log("Персонаж сменил форму на: " + currentForm);
-    }
-
-    private void UpdateSprite()
-    {
-        if (currentForm == PlayerForm.Fire)
-        {
-            spriteRenderer.sprite = fireFormSprite;
-        }
-        else
-        {
-            spriteRenderer.sprite = waterFormSprite;
-        }
-    }
-
-    public void SetNearTeleportationPoint(TeleportationPoint teleportPoint)
-    {
-        nearTeleportationPoint = teleportPoint;
-    }
-
-    private void TryTeleport()
-    {
-        if (currentForm == PlayerForm.Water && nearTeleportationPoint != null)
-        {
-            Transform target = nearTeleportationPoint.GetTeleportTarget();
-            if (target != null)
+            if(isFirePressed)
+                Weapon.Shoot();
+            plrMovement.Move(horizontalDirection, isJumpButtonPressed);
+            if (isSwitchFormPressed)
             {
-                transform.position = target.position; // Телепортация к точке
-                Debug.Log("Персонаж телепортировался!");
+                playerController.SwitchForm();
             }
-        }
-        else
-        {
-            Debug.Log("Телепортация невозможна: либо персонаж не в форме воды, либо рядом нет точки телепортации.");
+            if (isTeleportPressed)
+            {
+                playerController.TryTeleport();
+            }
         }
     }
 }

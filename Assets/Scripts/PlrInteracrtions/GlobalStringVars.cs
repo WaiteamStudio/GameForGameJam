@@ -13,5 +13,6 @@ public class GlobalStringVars
 public enum PlayerForm
 {
     Fire,
-    Water
+    Water,
+    none
 }

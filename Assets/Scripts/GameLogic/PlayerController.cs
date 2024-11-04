@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour, IService
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        healthComponent = GetComponent<HealthComponent>();
         PlrMovement = GetComponent<PlrMovement>();
+        healthComponent = ServiceLocator.current.Get<PlayerController>().GetHealthComponent();
         UpdateSprite();
         ServiceLocator.current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPlayerDied);
         

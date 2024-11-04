@@ -10558,9 +10558,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -10587,7 +10587,7 @@ Transform:
   m_GameObject: {fileID: 915752319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0565882, y: -9.007587, z: -9.996357}
+  m_LocalPosition: {x: 5.056218, y: -8.949003, z: -9.996357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10621,7 +10621,7 @@ Transform:
   m_GameObject: {fileID: 917344204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.363412, y: -0.052412987, z: 0}
+  m_LocalPosition: {x: -13.476218, y: -0.1109972, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10644,7 +10644,7 @@ MonoBehaviour:
   m_BoundingVolume: {fileID: 0}
   m_BoundingShape2D: {fileID: 2041648243}
   m_ConfineScreenEdges: 1
-  m_Damping: 1
+  m_Damping: 0
 --- !u!114 &917344207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10666,10 +10666,10 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1046146530}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 40
     OrthographicSize: 5
-    NearClipPlane: 0.3
-    FarClipPlane: 1000
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -11371,6 +11371,27 @@ MonoBehaviour:
   steamPool: {fileID: 1520776488}
   offset: {x: 0, y: 0, z: 0}
   effectDuration: 2
+--- !u!95 &1520776497
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520776487}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63127ddcfd626bb46a7ceb5cb206f07c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1547313783
 GameObject:
   m_ObjectHideFlags: 0
@@ -11814,6 +11835,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7428435658030649417, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1520776496}
+    - targetCorrespondingSourceObject: {fileID: 7428435658030649417, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1520776497}
   m_SourcePrefab: {fileID: 100100000, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
 --- !u!1 &1761495065
 GameObject:

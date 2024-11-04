@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IService
     ParticleSystem StepWaterPS;
     PlrMovement PlrMovement;
     private Time lastTimeEmited;
+    private Animator anim;
     private PlayerForm currentForm
     {
         get {
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour, IService
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlrMovement = GetComponent<PlrMovement>();
         healthComponent = GetComponent<HealthComponent>();
+        anim = GetComponent<Animator>();
         UpdateSprite();
         ServiceLocator.current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPlayerDied);
         
@@ -125,11 +127,11 @@ public class PlayerController : MonoBehaviour, IService
     {
         if (currentForm == PlayerForm.Fire)
         {
-            spriteRenderer.sprite = fireFormSprite;
+            anim.SetBool("isFire", true);//spriteRenderer.sprite = fireFormSprite;
         }
         else
         {
-            spriteRenderer.sprite = waterFormSprite;
+            anim.SetBool("isFire", false);//spriteRenderer.sprite = waterFormSprite;
         }
     }
 

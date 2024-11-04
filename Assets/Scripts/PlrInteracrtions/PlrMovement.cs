@@ -13,22 +13,31 @@ public class PlrMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask; //layer на котором находится земля
     private Rigidbody2D rb; //риджит боди объекта
     public bool IsMoving;
+    private Animator anim;
+    private float dir = 0;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         Vector3 overlapCirclePosition = groundColliderTransform.position;
         isGrounded = Physics2D.OverlapCircle(overlapCirclePosition, jumpOffset, groundMask);
+        if (isGrounded) { anim.SetBool("isJumping", false); anim.SetBool("isGrounded", true); }
+        else anim.SetBool("isGrounded", false);
+        anim.SetFloat("speed", Mathf.Abs(dir));
+        anim.SetFloat("verticalSpeed", rb.velocity.y);
     }
 
     public void Move(float direction, bool isJumpButtonPressed)
     {
+        dir = direction;
         if (isJumpButtonPressed)
         {
             Jump();
+
         }
 
         if (direction != 0)
@@ -46,6 +55,7 @@ public class PlrMovement : MonoBehaviour
         if (isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            anim.SetBool("isJumping", true);
         }
     }
 
@@ -60,5 +70,7 @@ public class PlrMovement : MonoBehaviour
             SoundManager.PlaySound(SoundManager.Sound.PlayerMoveWaterForm);
         }
         rb.velocity = new Vector2(direction*speed, rb.velocity.y);
+
+        transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x)* 0.54922f, 0.54922f, 0.54922f);//0.54922
     }
 }

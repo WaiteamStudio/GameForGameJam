@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour, IService
 
     private void EmitStepParticles()
     {
-        if(PlrMovement.IsMoving)
+        if(PlrMovement.IsMoving && PlrMovement.isGrounded)
         {
             if (currentForm == PlayerForm.Fire)
             {

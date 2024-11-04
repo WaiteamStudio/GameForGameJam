@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlrMovement : MonoBehaviour
 {
     [SerializeField] private float jumpForce; //сила прыжка
-    [SerializeField] private bool isGrounded = false; //булевая переменная проверки стоит ли на земле персонаж
+    [SerializeField] public bool isGrounded = false; //булевая переменная проверки стоит ли на земле персонаж
     [SerializeField] private float speed; //скорость персонажа
     [SerializeField] private Transform groundColliderTransform; //трансформ для того чтоб узнать позицию нижнего коллайдера персонажа
     [SerializeField] private float jumpOffset; //множитель на который мы увеличиваем наш обычный ground collider чтоб прыжок был более отзывчивым

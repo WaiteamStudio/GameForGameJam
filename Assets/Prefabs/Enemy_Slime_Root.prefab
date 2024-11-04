@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 5848132724589659725}
   - component: {fileID: 7095914443866183563}
   - component: {fileID: 6921786123943203324}
+  - component: {fileID: 1518673514801503438}
+  - component: {fileID: 1289208931842570849}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -198,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  invulnerabilityTime: 0
   form: 2
 --- !u!114 &6921786123943203324
 MonoBehaviour:
@@ -212,9 +215,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
+  invulnerabilityTime: 0
   currentForm: 0
-  entityType: 1
+  GetHitParticlesFog: {fileID: 0}
+  SteamEffectOnCollision: {fileID: 0}
+--- !u!114 &1518673514801503438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560749603782822627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e01109889a9f124fb3d289987ce853c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steamPool: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  effectDuration: 2
+--- !u!114 &1289208931842570849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560749603782822627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e73de7127636c144a89978c8997010d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2625632893207744882, guid: b3d3c5603391ddd43b9246fbd86fbf3d, type: 3}
+  poolSize: 10
 --- !u!1 &7271850228007194659
 GameObject:
   m_ObjectHideFlags: 0

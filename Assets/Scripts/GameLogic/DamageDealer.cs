@@ -20,7 +20,7 @@ public class DamageDealer : MonoBehaviour
             }
             else
             {
-                DealDamage(health,damage,out bool damaged);
+                DealDamage(health, damage , collision,out bool damaged);
                 if (damaged)
                 {
                     lastTimeDamaged = Time.time;
@@ -31,13 +31,21 @@ public class DamageDealer : MonoBehaviour
 
         }
     }
-    protected virtual void DealDamage(HealthComponent healthComponent, int damage, out bool damaged)
+    //protected virtual void DealDamage(HealthComponent healthComponent, int damage, out bool damaged)
+    //{ 
+    //    healthComponent.TakeDamage(damage,out bool takenDamaged);
+    //    damaged = takenDamaged;
+    //}
+    //protected virtual void DealDamage(HealthComponent healthComponent, int damage)
+    //{ 
+    //    healthComponent.TakeDamage(damage);
+    //}
+    protected virtual void DealDamage(HealthComponent healthComponent, int damage, Collision2D collision, out bool damaged)
     { 
-        healthComponent.TakeDamage(damage,out bool takenDamaged);
-        damaged = takenDamaged;
+        healthComponent.TakeDamage(new DamageParameters() {damage = damage,enemyCollision = collision}, out damaged);
     }
-    protected virtual void DealDamage(HealthComponent healthComponent, int damage)
-    { 
-        healthComponent.TakeDamage(damage);
-    }
+    //protected virtual void DealDamage(HealthComponent healthComponent, DamageParameters damageParameters, out bool damaged)
+    //{ 
+    //    healthComponent.TakeDamage(damageParameters,out damaged);
+    //}
 }

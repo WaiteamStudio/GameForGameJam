@@ -8,6 +8,16 @@ public class PlayerController : MonoBehaviour, IService
     private SpriteRenderer spriteRenderer; //компонент спрайт рендерер пресонажа 
     private TeleportationPoint nearTeleportationPoint = null; // Текущая точка телепортации рядом с персонажем
     HealthComponent healthComponent;
+    [SerializeField]
+    ParticleSystem HeadWaterPS;
+    [SerializeField]
+    ParticleSystem HeadFirePS;
+    [SerializeField]
+    ParticleSystem StepFirePS;
+    [SerializeField]
+    ParticleSystem StepWaterPS;
+    PlrMovement PlrMovement;
+    private Time lastTimeEmited;
     private PlayerForm currentForm
     {
         get {
@@ -21,9 +31,50 @@ public class PlayerController : MonoBehaviour, IService
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthComponent = GetComponent<HealthComponent>();
+        PlrMovement = GetComponent<PlrMovement>();
         UpdateSprite();
         ServiceLocator.current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPlayerDied);
+        
     }
+    private void Start()
+    {
+        InitParticleSystems();
+    }
+
+    private void InitParticleSystems()
+    {
+        SwitchParticleSystem();
+    }
+
+    private void Update()
+    {
+        EmitStepParticles();
+    }
+
+    private void EmitStepParticles()
+    {
+        if(PlrMovement.IsMoving)
+        {
+            if (currentForm == PlayerForm.Fire)
+            {
+                if(StepFirePS.isPlaying==false)
+                    StepFirePS.Play();
+                StepWaterPS?.Stop();
+            }
+            else
+            {
+                if(StepWaterPS?.isPlaying == false)
+                    StepWaterPS?.Play();
+                StepFirePS?.Stop();
+            }
+        }
+        else
+        {
+            StepFirePS?.Stop();
+            StepWaterPS?.Stop();
+        }
+    }
+
     public HealthComponent GetHealthComponent()
     {
         return healthComponent;
@@ -39,11 +90,33 @@ public class PlayerController : MonoBehaviour, IService
     {
         currentForm = currentForm == PlayerForm.Fire ? PlayerForm.Water : PlayerForm.Fire;
         UpdateSprite();
-        if (currentForm == PlayerForm.Fire)
-            SoundManager.PlaySound(SoundManager.Sound.FormSwitchFire);
-        else
-            SoundManager.PlaySound(SoundManager.Sound.FormSwitchWater);
+        PlaySwitchFormSound();
+        SwitchParticleSystem();
         Debug.Log("Персонаж сменил форму на: " + currentForm);
+    }
+
+    private void SwitchParticleSystem()
+    {
+        if (currentForm == PlayerForm.Fire)
+        {
+            HeadFirePS?.Play();
+            HeadWaterPS?.Stop();
+        }
+        else
+        {
+            HeadFirePS?.Stop();
+            HeadWaterPS?.Play();
+        }
+    }
+
+    private void PlaySwitchFormSound()
+    {
+        if (currentForm == PlayerForm.Fire)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.FormSwitchFire);
+        }
+        else
+        { SoundManager.PlaySound(SoundManager.Sound.FormSwitchWater); }
     }
 
     public void UpdateSprite()

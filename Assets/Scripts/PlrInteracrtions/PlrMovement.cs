@@ -12,7 +12,7 @@ public class PlrMovement : MonoBehaviour
     [SerializeField] private float jumpOffset; //множитель на который мы увеличиваем наш обычный ground collider чтоб прыжок был более отзывчивым
     [SerializeField] private LayerMask groundMask; //layer на котором находится земля
     private Rigidbody2D rb; //риджит боди объекта
-
+    public bool IsMoving;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,7 +34,10 @@ public class PlrMovement : MonoBehaviour
         if (direction != 0)
         {
             HorizontalMovement(direction);
+            IsMoving = true;
         }
+        else
+            IsMoving = false;
     }
 
     private void Jump()

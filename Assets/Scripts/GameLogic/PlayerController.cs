@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, IService
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlrMovement = GetComponent<PlrMovement>();
-        healthComponent = ServiceLocator.current.Get<PlayerController>().GetHealthComponent();
+        healthComponent = GetComponent<HealthComponent>();
         UpdateSprite();
         ServiceLocator.current.Get<EventBus>().Subscribe<PlayerDiedEvent>(OnPlayerDied);
         

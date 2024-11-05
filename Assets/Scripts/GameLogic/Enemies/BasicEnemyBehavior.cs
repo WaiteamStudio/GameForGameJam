@@ -31,6 +31,7 @@ public class BasicEnemyBehavior : MonoBehaviour
 
     //checking how close the player should be to the point to count it as "reached"
     public float distToPoint = 0.3f;
+    private Animator anim;
 
     private void Reset()
     {
@@ -74,20 +75,32 @@ public class BasicEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (dead){
+            anim.SetTrigger("dead");
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName("end anim"))
+            {
+                Destroy(gameObject.transform.parent.gameObject);
+            }
+        }
+        else
         switch (enemyState)
         {
+            
             case 0: //idle
+                anim.SetBool("iswalking", false);
                 idleTimer -= Time.deltaTime;
                 if (idleTimer < 0) enemyState = 1;
                 PlayerTrigger();
                 break;
 
             case 1: //patrol
+                anim.SetBool("iswalking", true);    
                 MoveToNextPoint();
                 PlayerTrigger();
                 break;
 
             case 2: //angy
+                anim.SetBool("iswalking", true);
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y), moveSpeed * Time.deltaTime);
                 if (player.transform.position.x > transform.position.x)
                 {
@@ -110,6 +123,7 @@ public class BasicEnemyBehavior : MonoBehaviour
         //something something platform boundaries
 
     }
+
     private void PlayerTrigger()
     {
         if (Vector2.Distance(transform.position, new Vector2(player.transform.position.x, transform.position.y)) < distToPlayerHor && Vector2.Distance(transform.position, new Vector2(transform.position.x, player.transform.position.y)) < distToPlayerVert)
@@ -120,12 +134,15 @@ public class BasicEnemyBehavior : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        anim = GetComponent<Animator>();
+        anim.SetBool("isFire", isFire);
     }
 
     private void DeathEnemy()
     {
-        Destroy(gameObject.transform.parent.gameObject);
+        //Destroy(gameObject.transform.parent.gameObject);
         //Destroy(gameObject);
+        dead = true;
     }
 
     void MoveToNextPoint()

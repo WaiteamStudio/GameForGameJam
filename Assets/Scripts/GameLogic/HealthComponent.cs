@@ -12,10 +12,27 @@ public class HealthComponent : MonoBehaviour
     ParticleSystem GetHitParticlesFog;
     [SerializeField]
     SteamEffectOnCollision SteamEffectOnCollision;
+    private bool dead = false;
+    private Animator anim;
     protected virtual void Start()
     {
         currentHealth = maxHealth;
         SteamEffectOnCollision = GetComponent<SteamEffectOnCollision>();
+        anim = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+
+        if (dead)
+        {
+            anim.SetTrigger("dead");
+            if (anim.GetAnimatorTransitionInfo(0).IsName("end anim"))
+            {
+                Destroy(gameObject.transform.parent.gameObject);
+            }
+        }
+
     }
     public int GetCurrentHealth()
     {
@@ -112,6 +129,7 @@ public class HealthComponent : MonoBehaviour
     }
     protected virtual void Die()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        dead = true;
     }
 }

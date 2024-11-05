@@ -12,7 +12,14 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     bool LifeTimeDestroy;
     MoveMechanic moveMechanic;
+    private bool destroyBullet = false;
+    private Animator anim;
 
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     public Bullet()
     {
         Direction = GetStartingDirection();
@@ -23,12 +30,22 @@ public class Bullet : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(ScreenEdgeDestroy)
+        if (ScreenEdgeDestroy)
             CheckIfOutOfScreen();
         if (moveMechanic != null)
         {
             moveMechanic.FixedUpdate();
         }
+        if (destroyBullet)
+        {
+            moveMechanic = null;
+            anim.SetTrigger("impact");
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("bullet impact"))
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
     public void Init(Vector3 direction, float MoveSpeed)
     {
@@ -74,7 +91,8 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        destroyBullet = true;
     }
 
     internal void SetForm(PlayerForm playerForm)

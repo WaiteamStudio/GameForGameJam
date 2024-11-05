@@ -11714,7 +11714,7 @@ Transform:
   m_GameObject: {fileID: 915752319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0617561, y: -9.00763, z: -9.996357}
+  m_LocalPosition: {x: -2.035904, y: -9.007418, z: -9.996357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11748,7 +11748,7 @@ Transform:
   m_GameObject: {fileID: 917344204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.358244, y: -0.05237007, z: 0}
+  m_LocalPosition: {x: -6.384096, y: -0.05258274, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13838,6 +13838,30 @@ PrefabInstance:
       propertyPath: BulletParent
       value: 
       objectReference: {fileID: 1506907021}
+    - target: {fileID: 649495713735548312, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: UVModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649495713735548312, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649495713735548312, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: ShapeModule.m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 5fcdcb8f2d61cf44cb750f0212941280, type: 3}
+    - target: {fileID: 649495713735548312, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fcdcb8f2d61cf44cb750f0212941280, type: 3}
+    - target: {fileID: 649495713735548312, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649495713735548312, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
     - target: {fileID: 1251694100819242432, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
       propertyPath: maxHealth
       value: 3
@@ -13874,6 +13898,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4639132437899962135, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639132437899962135, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fcdcb8f2d61cf44cb750f0212941280, type: 3}
     - target: {fileID: 5174120329486098296, guid: f6277f45d949cbc4ab24d9a46636298d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.54922
